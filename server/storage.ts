@@ -58,6 +58,13 @@ export class MemStorage implements IStorage {
       ...insertConnection,
       id,
       timestamp: new Date(),
+      port: insertConnection.port ?? null,
+      protocol: insertConnection.protocol ?? null,
+      processName: insertConnection.processName ?? null,
+      physicalAddress: insertConnection.physicalAddress ?? null,
+      country: insertConnection.country ?? null,
+      city: insertConnection.city ?? null,
+      isVpn: insertConnection.isVpn ?? false,
     };
     this.connections.set(id, connection);
     return connection;
@@ -92,6 +99,9 @@ export class MemStorage implements IStorage {
       id,
       timestamp: new Date(),
       resolved: false,
+      ipAddress: insertAlert.ipAddress ?? null,
+      processName: insertAlert.processName ?? null,
+      processPath: insertAlert.processPath ?? null,
     };
     this.spyAlerts.set(id, alert);
     return alert;
@@ -117,6 +127,15 @@ export class MemStorage implements IStorage {
       ...insertGeo,
       id,
       lastUpdated: new Date(),
+      physicalAddress: insertGeo.physicalAddress ?? null,
+      country: insertGeo.country ?? null,
+      city: insertGeo.city ?? null,
+      region: insertGeo.region ?? null,
+      latitude: insertGeo.latitude ?? null,
+      longitude: insertGeo.longitude ?? null,
+      isp: insertGeo.isp ?? null,
+      organization: insertGeo.organization ?? null,
+      isVpn: insertGeo.isVpn ?? false,
     };
     this.geoCache.set(id, geo);
     return geo;
@@ -153,6 +172,9 @@ export class MemStorage implements IStorage {
       ...insertScan,
       id,
       timestamp: new Date(),
+      duration: insertScan.duration ?? null,
+      findings: insertScan.findings ?? {},
+      threatsFound: insertScan.threatsFound ?? null,
     };
     this.systemScans.set(id, scan);
     return scan;

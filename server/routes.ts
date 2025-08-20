@@ -2,9 +2,14 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { WebSocketServer, WebSocket } from "ws";
 import { storage } from "./storage";
-import { networkMonitor } from "./services/networkMonitor";
-import { spyDetector } from "./services/spyDetector";
-import { geoLocationService } from "./services/geoLocation";
+import { NetworkMonitor } from "./services/networkMonitor";
+import { SpyDetectorService } from "./services/spyDetector";
+import { GeoLocationService } from "./services/geoLocation";
+
+// Initialize services
+const networkMonitor = new NetworkMonitor();
+const spyDetector = new SpyDetectorService(storage);
+const geoLocationService = new GeoLocationService(storage);
 
 export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
